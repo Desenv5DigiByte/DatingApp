@@ -15,5 +15,6 @@ namespace DatingApp.API.Helpers
         public string Gender { get; set; }
         public int MinAge { get; set; } = 0;
         public int MaxAge { get; set; } = 999;
+        public string OrderBy { get; set; }
     }
 }
