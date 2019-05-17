@@ -1,3 +1,4 @@
+using System;
 using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,7 @@ namespace DatingApp.API.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Value> Values { get; set; }
@@ -15,6 +16,13 @@ namespace DatingApp.API.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Message> Messages { get; set; }
+
+        public DataContext Create(string dbname)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
+            optionsBuilder.UseSqlServer(string.Format("Server=localhost\\SQLEXPRESS;Database={0};Trusted_Connection=True;", dbname));
+            return new DataContext(optionsBuilder.Options);
+        }
 
         protected override void OnModelCreating(ModelBuilder builder) 
         {
